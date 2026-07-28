@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* Force Tailwind v4 to toggle dark mode via .dark class instead of system settings */
+@variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  @apply bg-zinc-50 text-zinc-900 dark:bg-[#09090b] dark:text-zinc-50 transition-colors duration-300 antialiased;
+}
+
+.underline-animation {
+  position: relative;
+}
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  @apply bg-blue-600 dark:bg-blue-400;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
