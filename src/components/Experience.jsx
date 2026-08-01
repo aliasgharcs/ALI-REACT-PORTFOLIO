@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 export default function Experience() {
-  // Tracks which card index is currently hovered to handle smooth transition scaling
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  // Tracks which card index is currently expanded (click to toggle)
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const experienceData = [
     {
@@ -46,6 +46,10 @@ export default function Experience() {
     }
   ];
 
+  const handleToggle = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
     <section id="experience" className="py-24 w-full bg-transparent transition-colors duration-500">
       <div className="max-w-4xl mx-auto px-6">
@@ -65,19 +69,18 @@ export default function Experience() {
         <div className="relative border-l-2 border-zinc-200 dark:border-zinc-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-8">
           
           {experienceData.map((exp, index) => {
-            const isHovered = hoveredIndex === index;
+            const isExpanded = expandedIndex === index;
             
             return (
               <div 
                 key={index} 
-                className="relative group cursor-default"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                className="relative group cursor-pointer"
+                onClick={() => handleToggle(index)}
               >
                 
                 {/* Timeline Node Point (Briefcase Indicator) */}
                 <span className={`absolute -left-[45px] md:-left-[61px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
-                  isHovered 
+                  isExpanded 
                     ? 'bg-teal-500 dark:bg-teal-400 text-white scale-110' 
                     : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'
                 }`}>
@@ -88,16 +91,16 @@ export default function Experience() {
 
                 {/* Main Card Box Layout */}
                 <div className={`bg-white dark:bg-zinc-950 border rounded-3xl p-6 md:p-8 transition-all duration-300 ${
-                  isHovered 
+                  isExpanded 
                     ? 'border-teal-500/50 dark:border-teal-400/30 shadow-lg dark:shadow-teal-950/10 bg-zinc-50/50 dark:bg-zinc-900/40' 
-                    : 'border-zinc-200 dark:border-zinc-800 shadow-xs'
+                    : 'border-zinc-200 dark:border-zinc-800 shadow-xs hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md'
                 }`}>
                   
                   {/* Header Title Section */}
                   <div className="w-full flex items-start justify-between text-left">
                     <div className="space-y-2">
                       <h3 className={`text-xl md:text-2xl font-black tracking-tight transition-colors duration-300 ${
-                        isHovered ? 'text-teal-600 dark:text-teal-400' : 'text-zinc-950 dark:text-white'
+                        isExpanded ? 'text-teal-600 dark:text-teal-400' : 'text-zinc-950 dark:text-white'
                       }`}>
                         {exp.role}
                       </h3>
@@ -115,17 +118,24 @@ export default function Experience() {
                     </div>
 
                     {/* Chevron Indicator */}
-                    <span className={`text-zinc-400 dark:text-zinc-600 transition-transform duration-300 ${isHovered ? 'rotate-180 text-teal-500' : ''}`}>
+                    <span className={`text-zinc-400 dark:text-zinc-600 transition-transform duration-300 flex-shrink-0 mt-1 ${isExpanded ? 'rotate-180 text-teal-500' : ''}`}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                       </svg>
                     </span>
                   </div>
 
+                  {/* Tap hint text (shows when collapsed) */}
+                  {!isExpanded && (
+                    <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-3 font-medium">
+                      Tap to view details →
+                    </p>
+                  )}
+
                   {/* Expandable Bullet List Content Container */}
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isHovered 
-                      ? 'max-h-[650px] opacity-100 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800' 
+                    isExpanded 
+                      ? 'max-h-[800px] opacity-100 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800' 
                       : 'max-h-0 opacity-0 pointer-events-none'
                   }`}>
                     <ul className="space-y-4">

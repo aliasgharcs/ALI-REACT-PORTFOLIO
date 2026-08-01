@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About'; 
+import TechStack from './components/TechStack';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import DataBackground from './components/DataBackground';
-import Certifications from './components/Certifications'; // Fixed to plural 'Certifications'
+import Certifications from './components/Certifications';
+import Contact from './components/Contact';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -38,9 +40,11 @@ export default function App() {
       <main className="w-full pt-16 relative z-10 flex flex-col">
         <Hero />
         <About />
+        <TechStack />
         <Experience />
         <Projects />
         <Certifications />
+        <Contact />
       </main>
       
       <Footer />
