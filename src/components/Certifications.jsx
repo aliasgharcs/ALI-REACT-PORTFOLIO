@@ -3,22 +3,22 @@ import React from 'react';
 export default function Certifications() {
   const stats = [
     { number: '600+', label: 'Learning Hours' },
-    { number: '8+', label: 'Certifications' },
+    { number: '3', label: 'Key Certifications' },
     { number: '5+', label: 'Learning Platforms' },
-    { number: '15+', label: 'Projects Completed' }
+    { number: '10+', label: 'Projects Completed' }
   ];
 
   const certificationsData = [
     {
       id: 1,
       title: 'Data Analytics Essentials',
-      issuer: 'Cisco Networking Academy',
+      issuer: 'Cisco Networking Academy & Coursera',
       issuerShort: 'C',
       issuerBg: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400',
       date: 'Nov 2023',
       skills: 'Data Analysis, Database, Data Visualization, Data Warehouse',
       previewBg: 'from-emerald-900/80 to-teal-900/90',
-      verifyUrl: '#'
+      verifyUrl: 'https://www.credly.com/badges/c03cb396-124a-41f3-9255-317045f849f2'
     },
     {
       id: 2,
@@ -29,29 +29,19 @@ export default function Certifications() {
       date: 'Dec 2023',
       skills: 'Data Science, Excel, Data Wrangling, Pivot Tables',
       previewBg: 'from-blue-900/80 to-indigo-900/90',
-      verifyUrl: '#'
+      verifyUrl: 'https://www.credly.com/badges/1cabbba0-27bb-44fb-bb87-a38ce35b67bb'
     },
     {
       id: 3,
-      title: 'Power BI Data Analyst Certification',
-      issuer: 'Microsoft & DataCamp',
-      issuerShort: 'M',
-      issuerBg: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400',
-      date: 'Apr 2024',
-      skills: 'Power BI, DAX, Data Modeling, Dashboard Design',
-      previewBg: 'from-amber-900/80 to-orange-900/90',
-      verifyUrl: '#'
-    },
-    {
-      id: 4,
-      title: 'M.Sc. Artificial Intelligence Coursework',
+      title: 'Certificate Of Appreciation',
       issuer: 'BTU Cottbus',
       issuerShort: 'B',
       issuerBg: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-400',
-      date: 'Oct 2023 – Present',
-      skills: 'Machine Learning, Neural Networks, Python, Statistics',
+      date: 'Fall 2021',
+      skills: 'Artificial Intelligence, Machine Learning, Semester Project Excellence',
+      note: "Certificate for hard work and dedication to the semester project of Fall'2021 for Artificial Intelligence.",
       previewBg: 'from-purple-900/80 to-violet-900/90',
-      verifyUrl: '#'
+      verifyUrl: 'https://github.com/aliasgharcs'
     }
   ];
 
@@ -61,7 +51,6 @@ export default function Certifications() {
         
         {/* Top Header Section */}
         <div className="text-center space-y-4 mb-16">
-          {/* Continuous Learning Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800/50 text-teal-600 dark:text-teal-400 text-xs font-bold tracking-wide">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
@@ -70,13 +59,13 @@ export default function Certifications() {
           </div>
 
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
-            Always Learning, Always <span className="text-teal-600 dark:text-teal-400">Evolving</span>
+            Certifications & <span className="text-teal-600 dark:text-teal-400">Honors</span>
           </h2>
           
           <div className="w-16 h-1 bg-teal-500/60 mx-auto rounded-full" />
 
           <p className="text-zinc-500 dark:text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-medium">
-            A commitment to mastering the tools, techniques, and mindset that turn raw data into strategic business decisions.
+            Verified credentials and academic recognition for excellence in data analytics and artificial intelligence.
           </p>
         </div>
 
@@ -96,17 +85,16 @@ export default function Certifications() {
           </div>
         </div>
 
-        {/* Certifications 4-Column Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Certifications 3-Column Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {certificationsData.map((cert) => (
             <div
               key={cert.id}
               className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
-                {/* Certificate Visual Preview Header */}
-                <div className={`relative h-40 bg-linear-to-br ${cert.previewBg} p-4 flex flex-col justify-between border-b border-zinc-100 dark:border-zinc-800/80 overflow-hidden`}>
-                  {/* Watermark Design Element */}
+                {/* Certificate Visual Header */}
+                <div className={`relative h-40 bg-gradient-to-br ${cert.previewBg} p-5 flex flex-col justify-between border-b border-zinc-100 dark:border-zinc-800/80 overflow-hidden`}>
                   <div className="absolute -right-4 -bottom-4 text-white/10 font-black text-6xl select-none pointer-events-none">
                     CERT
                   </div>
@@ -126,9 +114,8 @@ export default function Certifications() {
                   </div>
                 </div>
 
-                {/* Card Content Details */}
-                <div className="p-5 space-y-4">
-                  {/* Issuer Row */}
+                {/* Card Body */}
+                <div className="p-6 space-y-4">
                   <div className="flex items-center gap-2.5">
                     <span className={`w-7 h-7 rounded-full font-black text-xs flex items-center justify-center shrink-0 ${cert.issuerBg}`}>
                       {cert.issuerShort}
@@ -138,27 +125,37 @@ export default function Certifications() {
                     </span>
                   </div>
 
-                  {/* Title & Issue Date */}
                   <div className="space-y-1">
-                    <h3 className="text-base font-black text-zinc-950 dark:text-white tracking-tight leading-snug line-clamp-2">
+                    <h3 className="text-lg font-black text-zinc-950 dark:text-white tracking-tight leading-snug">
                       {cert.title}
                     </h3>
-                    <p className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                    <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                       {cert.date}
                     </p>
                   </div>
+
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+                    <span className="font-bold text-zinc-700 dark:text-zinc-300">Skills: </span>
+                    {cert.skills}
+                  </p>
+
+                  {cert.note && (
+                    <p className="text-xs text-teal-600 dark:text-teal-400 italic bg-teal-50/50 dark:bg-teal-950/30 p-2.5 rounded-xl border border-teal-200/50 dark:border-teal-800/40">
+                      "{cert.note}"
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {/* Verify Credential Button Footer */}
-              <div className="p-5 pt-0">
+              {/* Verify Credential Button */}
+              <div className="p-6 pt-0">
                 <a
                   href={cert.verifyUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full py-2.5 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 text-teal-600 dark:text-teal-400 hover:bg-teal-50/50 dark:hover:bg-zinc-800/50 text-xs font-bold transition-all flex items-center justify-center gap-1.5 group-hover:border-teal-500/40"
                 >
-                  <span>Verify Credential</span>
+                  <span>Verify Credential Link</span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                   </svg>

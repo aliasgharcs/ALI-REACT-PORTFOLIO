@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const categories = [
     'All',
@@ -15,58 +16,179 @@ export default function Projects() {
   const projectsData = [
     {
       id: 1,
-      title: 'German EV Charging Infrastructure & Global Policy Tracker',
+      title: 'German EV Charging Infrastructure',
       category: 'Operations',
       featured: true,
-      description: 'Interactive analytics platform evaluating market concentration, charging capacity distribution across Germany, and global EV policy readiness across UN member states. Built using Power BI with custom geospatial layers and Python-driven data processing pipelines on GCP.',
-      image: 'https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&fit=crop&w=1200&q=80',
-      tags: ['Power BI', 'Python', 'GCP', 'Geospatial Analysis'],
-      liveUrl: 'https://github.com/aliasgharcs',
-      repoUrl: 'https://github.com/aliasgharcs'
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: "Analyzed over 71,000 charging points across nearly 5,000 operators to map Germany's electric vehicle charging landscape, identifying market fragmentation, infrastructure gaps, and growth patterns.",
+      keyOutcomes: [
+        'Collected, cleaned, and standardized three decades of historical charging point data using Python.',
+        'Built an interactive Power BI dashboard with an Excel supporting layer to visualize operator market share, charger speed distribution, and geographic coverage.',
+        'Optimized DAX measures to efficiently handle 70,000+ rows of data with multiple joins.',
+        'Uncovered the market dominance of "Other" operators, reshaping infrastructure planning perspectives for small players.'
+      ],
+      image: '/projects/ev_charging_de.png',
+      tags: ['Python', 'Power BI', 'DAX', 'Excel'],
+      githubUrl: 'https://github.com/aliasgharcs'
     },
     {
       id: 2,
-      title: 'Pizza Sales Performance & Trend Analysis',
+      title: 'Pizza Shop Sales Dashboard',
       category: 'Sales',
       featured: false,
-      description: 'End-to-end sales dashboard analyzing peak order periods, best-selling pizza categories, hourly revenue trends, and seasonal demand patterns using SQL for data extraction and Power BI for interactive storytelling.',
-      image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
-      tags: ['MS Excel', 'SQL', 'Power BI', 'Python'],
-      liveUrl: 'https://github.com/aliasgharcs',
-      repoUrl: 'https://github.com/aliasgharcs'
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: 'Developed a dynamic sales dashboard to transform messy raw order logs into actionable insights, helping business owners understand customer behavior, optimize inventory, and boost profitability.',
+      keyOutcomes: [
+        'Imported, cleaned, and standardized CSV sales data using SQL and Power BI, rectifying inconsistent date/time formats and missing values.',
+        'Created calculated columns and built robust data relationships across order details, pizza types, and categories.',
+        'Delivered an intuitive dashboard filtering by time, category, and size to reveal peak hours and best-selling products.',
+        'Uncovered seasonality and customer demographic impacts, driving data-informed decisions for promotions and staffing.'
+      ],
+      image: '/projects/pizza_sales.png',
+      tags: ['SQL', 'Power BI'],
+      githubUrl: 'https://github.com/aliasgharcs'
     },
     {
       id: 3,
-      title: 'Bank Loan Risk & Credit Performance Report',
+      title: 'Bank Loan Dashboard',
       category: 'Finance',
       featured: false,
-      description: 'Comprehensive banking dashboard monitoring loan portfolio health, assessing debt-to-income (DTI) ratios, and segmenting applicants by risk profile. Delivered actionable insights for credit analysts and senior leadership.',
-      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
-      tags: ['SQL', 'Tableau', 'Financial Modeling'],
-      liveUrl: 'https://github.com/aliasgharcs',
-      repoUrl: 'https://github.com/aliasgharcs'
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: 'Built a comprehensive loan management dashboard to visualize application volume, funded amounts, payment status, and interest rates, enabling the bank to assess risk and optimize loan offerings.',
+      keyOutcomes: [
+        'Imported scattered CSV loan data into SQL Server for structured querying and connected it to Tableau for visualization.',
+        'Standardized date formats and loan statuses, and created calculated fields for total loan amounts, payments, and outstanding balances.',
+        'Designed an interactive Tableau dashboard with clear filters for time periods, regions, and loan types.',
+        'Identified critical links between loan terms, interest rates, and repayment success to refine credit models and collection efforts.'
+      ],
+      image: '/projects/bank_loan.png',
+      tags: ['Tableau', 'SQL Server', 'SQL'],
+      githubUrl: 'https://github.com/aliasgharcs'
     },
     {
       id: 4,
-      title: 'Enterprise HR Workforce Analytics Dashboard',
-      category: 'HR',
+      title: 'Road Accident Dashboard',
+      category: 'Operations',
       featured: false,
-      description: 'End-to-end workforce analytics platform tracking key attrition drivers, demographic splits, and compensation distributions across 10,000+ employees. Identified top turnover risk factors and supported HR strategy decisions.',
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
-      tags: ['Excel', 'Power BI', 'DAX', 'Workforce Analytics'],
-      liveUrl: 'https://github.com/aliasgharcs',
-      repoUrl: 'https://github.com/aliasgharcs'
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: 'Created a comprehensive accident tracking dashboard visualizing severity, hotspots, and causal trends across time, vehicle types, and weather conditions to aid evidence-based safety planning.',
+      keyOutcomes: [
+        'Aggregated and cleaned disparate CSV accident reports in Excel, handling missing values through imputation and correcting inconsistent severity labels.',
+        'Merged datasets covering accident details, weather conditions, and vehicle types, extracting time-based features for trend analysis.',
+        'Built an intuitive dashboard allowing safety planners to drill down into high-risk zones and contributing factors.',
+        'Analyzed patterns in over 3,000 fatal accidents to help prioritize infrastructure upgrades and optimize emergency response.'
+      ],
+      image: '/projects/road_accident.jpg',
+      tags: ['Excel'],
+      githubUrl: 'https://github.com/aliasgharcs'
     },
     {
       id: 5,
-      title: 'Real-Time Gender & Age Detection Model',
+      title: 'HR Analytics Dashboard BI',
+      category: 'HR',
+      featured: false,
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
+      keyOutcomes: [
+        'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
+        'Developed complex DAX measures for attrition rate, average age, salary, and tenure.',
+        'Designed an interactive dashboard cross-tabulating job roles against satisfaction scores, education, and age distributions.',
+        'Identified significant turnover spikes during Year 1 and in lower salary bands, directly shaping onboarding and compensation strategies.'
+      ],
+      image: '/projects/hr_analytics_bi.png',
+      tags: ['Power BI', 'DAX'],
+      githubUrl: 'https://github.com/aliasgharcs'
+    },
+    {
+      id: 6,
+      title: 'HR Analytics Dashboard Excel',
+      category: 'HR',
+      featured: false,
+      hasVideoDemo: true,
+      videoUrl: 'https://github.com/aliasgharcs',
+      description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
+      keyOutcomes: [
+        'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
+        'Developed complex DAX measures for attrition rate, average age, salary, and tenure.',
+        'Designed an interactive dashboard cross-tabulating job roles against satisfaction scores, education, and age distributions.',
+        'Identified significant turnover spikes during Year 1 and in lower salary bands, directly shaping onboarding and compensation strategies.'
+      ],
+      image: '/projects/hr_analytics_excel.png',
+      tags: ['Power BI', 'DAX', 'Excel'],
+      githubUrl: 'https://github.com/aliasgharcs'
+    },
+    {
+      id: 7,
+      title: 'Global EV Policy & Sustainability Dashboard',
+      category: 'Operations',
+      featured: false,
+      hasVideoDemo: false,
+      description: 'Engineered a global benchmarking tool evaluating EV adoption readiness and sustainability frameworks across 193 UN Member States by consolidating disparate policy, energy, and socioeconomic data.',
+      keyOutcomes: [
+        'Audited and harmonized unstructured data from UN Statistics, the IEA, and the World Bank into a unified analytical format.',
+        'Categorized nations by "Policy Maturity" and "Market Readiness" based on a scoring framework covering VAT exemptions, import taxes, and ICE phase-out targets.',
+        'Correlated energy metrics with carbon goals to measure the environmental ROI of transitioning to electric mobility based on grid carbon intensity.',
+        'Quantified socioeconomic drivers like urbanization rates and GDP to assess the feasibility of mass-market EV infrastructure deployment.'
+      ],
+      image: '/projects/global_ev_policy.png',
+      tags: ['Power BI', 'SQL', 'Excel'],
+      githubUrl: 'https://github.com/aliasgharcs'
+    },
+    {
+      id: 8,
+      title: 'E-Commerce Store Analytics',
+      category: 'Sales',
+      featured: false,
+      hasVideoDemo: false,
+      description: 'Designed a comprehensive performance dashboard analyzing nearly 10,000 online orders to uncover regional dominance, category trends, and customer segments, driving strategic growth decisions.',
+      keyOutcomes: [
+        'Connected transaction data to Looker Studio to build a clean, interactive dashboard around geography, product category, and customer segments.',
+        'Visualized regional distribution, demonstrating that the West and East regions combined for over 60% of total orders.',
+        'Identified that Office Supplies dominated order volume (52.3%), while Technology and Furniture presented higher-value growth opportunities.',
+        'Enabled targeted outreach by allowing stakeholders to drill down into top-performing states, cities, and individual corporate accounts.'
+      ],
+      image: '/projects/ecommerce_looker.png',
+      tags: ['Looker Studio'],
+      githubUrl: 'https://github.com/aliasgharcs'
+    },
+    {
+      id: 9,
+      title: 'Big Data Analytics with Apache Spark',
       category: 'AI & ML',
       featured: false,
-      description: 'Convolutional Neural Network (CNN) integrated with OpenCV for real-time facial detection, input preprocessing, and demographic estimation with live webcam support.',
-      image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80',
-      tags: ['Python', 'OpenCV', 'CNN', 'Deep Learning'],
-      liveUrl: 'https://github.com/aliasgharcs',
-      repoUrl: 'https://github.com/aliasgharcs'
+      hasVideoDemo: false,
+      description: 'Built an end-to-end big data ML pipeline to predict diabetes outcomes using Apache Spark and PySpark MLlib, featuring distributed data ingestion, EDA, and algorithm benchmarking.',
+      keyOutcomes: [
+        'Benchmarked 5 classification models (Logistic Regression, Random Forest, Naive Bayes, Decision Tree, GBT), with Logistic Regression achieving top accuracy at 80.77%.',
+        'Identified Glucose, BMI, and DiabetesPedigreeFunction as the strongest outcome predictors via LR feature coefficients.',
+        'Performed distributed Exploratory Data Analysis (EDA) and Pearson correlation analysis using PySpark and Spark MLlib Statistics.',
+        'Constructed a complete, distributed machine learning pipeline covering ingestion, EDA, feature engineering, training, and evaluation.'
+      ],
+      image: '/projects/spark_diabetes.png',
+      tags: ['Apache Spark', 'PySpark', 'MLlib', 'Python', 'Big Data'],
+      githubUrl: 'https://github.com/aliasgharcs'
+    },
+    {
+      id: 10,
+      title: 'Gender & Age Detection System',
+      category: 'AI & ML',
+      featured: false,
+      hasVideoDemo: false,
+      description: 'Built a real-time, lightweight computer vision system that detects faces and predicts demographic attributes (biological sex and age brackets) directly from a live video feed using standard CPU hardware.',
+      keyOutcomes: [
+        'Designed a 4-stage vision pipeline using a Single Shot MultiBox Detector (SSD) with a ResNet-10 backbone for face detection with >70% confidence.',
+        'Implemented dual deep learning Convolutional Neural Networks (CNNs) using Caffe and TensorFlow for simultaneous gender classification and 8-bracket age estimation.',
+        'Optimized deep learning models for efficient real-time inference on standard CPU hardware without cloud dependencies.',
+        'Achieved 84.1% 1-off accuracy for age bracket prediction on challenging, noise-heavy "in-the-wild" datasets.'
+      ],
+      image: '/projects/gender_age_cnn.png',
+      tags: ['OpenCV', 'Deep Learning', 'Caffe', 'TensorFlow', 'Python'],
+      githubUrl: 'https://github.com/aliasgharcs'
     }
   ];
 
@@ -74,8 +196,7 @@ export default function Projects() {
     ? projectsData
     : projectsData.filter((p) => p.category === activeFilter);
 
-  // Only show featured badge if the project is explicitly marked featured
-  const featuredProject = filteredProjects.find((p) => p.featured) ?? null;
+  const featuredProject = activeFilter === 'All' ? projectsData.find((p) => p.featured) : null;
   const standardProjects = filteredProjects.filter((p) => p.id !== (featuredProject ? featuredProject.id : null));
 
   return (
@@ -89,7 +210,7 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-medium">
-            Explore real-world analytics projects across different industries, where data was transformed into actionable business insights.
+            Explore real-world data analytics & BI dashboards transforming complex raw records into strategic, actionable business decisions.
           </p>
         </div>
 
@@ -101,7 +222,7 @@ export default function Projects() {
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`px-5 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 ${
+                className={`px-5 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 cursor-pointer ${
                   isActive
                     ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
                     : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -116,14 +237,17 @@ export default function Projects() {
         {/* Dynamic Project Display Grid */}
         <div className="space-y-8">
           
-          {/* Featured Large Layout — only when an explicitly-featured project exists in filtered set */}
+          {/* Featured Large Hero Card */}
           {featuredProject && (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group">
-              <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-auto overflow-hidden">
+              <div 
+                className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-zinc-900 cursor-pointer"
+                onClick={() => setSelectedProject(featuredProject)}
+              >
                 <img
                   src={featuredProject.image}
                   alt={featuredProject.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/90 text-white backdrop-blur-md">
@@ -149,7 +273,7 @@ export default function Projects() {
                     {featuredProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-xs font-semibold"
+                        className="px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-semibold"
                       >
                         {tag}
                       </span>
@@ -158,30 +282,33 @@ export default function Projects() {
                 </div>
 
                 {/* Call To Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                  <a
-                    href={featuredProject.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm transition-all"
+                <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                  {featuredProject.hasVideoDemo && (
+                    <a
+                      href={featuredProject.videoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs md:text-sm transition-all shadow-xs"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      <span>Project Tutorial (Video)</span>
+                    </a>
+                  )}
+                  
+                  <button
+                    onClick={() => setSelectedProject(featuredProject)}
+                    className="inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm transition-all cursor-pointer shadow-xs"
                   >
-                    View Dashboard
-                  </a>
-                  <a
-                    href={featuredProject.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold text-xs md:text-sm transition-all"
-                  >
-                    <span>Read Details</span>
-                    <span>→</span>
-                  </a>
+                    Project Details
+                  </button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Standard 3-Column Grid Layout */}
+          {/* Standard Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {standardProjects.map((project) => (
               <div
@@ -190,20 +317,35 @@ export default function Projects() {
               >
                 <div>
                   {/* Thumbnail Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div 
+                    className="relative h-52 overflow-hidden bg-zinc-900 cursor-pointer"
+                    onClick={() => setSelectedProject(project)}
+                  >
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-teal-500/90 text-white backdrop-blur-md">
                       {project.category}
                     </span>
+
+                    {project.hasVideoDemo && (
+                      <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-600/90 text-white backdrop-blur-md flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-3 h-3">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Video Demo
+                      </span>
+                    )}
                   </div>
 
                   {/* Card Content Body */}
                   <div className="p-6 space-y-3">
-                    <h3 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight leading-snug">
+                    <h3 
+                      className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight leading-snug cursor-pointer hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                      onClick={() => setSelectedProject(project)}
+                    >
                       {project.title}
                     </h3>
                     <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3">
@@ -225,39 +367,156 @@ export default function Projects() {
                 </div>
 
                 {/* Footer Action Bar */}
-                <div className="p-6 pt-0 flex items-center gap-3">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-all"
+                <div className="p-6 pt-0 flex flex-wrap items-center gap-2 justify-between">
+                  {project.hasVideoDemo ? (
+                    <a
+                      href={project.videoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-3.5 h-3.5">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      <span>Project Tutorial</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold text-xs transition-all"
+                    >
+                      <span>GitHub</span>
+                      <span>→</span>
+                    </a>
+                  )}
+
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-all cursor-pointer"
                   >
-                    View Dashboard
-                  </a>
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 px-4 py-2 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold text-xs transition-all"
-                  >
-                    <span>Read Details</span>
-                    <span>→</span>
-                  </a>
+                    Project Details
+                  </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Empty state when filter returns nothing */}
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-20 text-zinc-400 dark:text-zinc-600">
-              <p className="text-lg font-semibold">No projects in this category yet.</p>
-            </div>
-          )}
-
         </div>
 
       </div>
+
+      {/* Project Details Modal */}
+      {selectedProject && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div 
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl my-8 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Modal Content */}
+            <div className="space-y-6">
+              {/* Category Badge & Title */}
+              <div className="space-y-2 pr-8">
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-500 text-white">
+                  {selectedProject.category}
+                </span>
+                <h3 className="text-2xl md:text-3xl font-black text-zinc-950 dark:text-white tracking-tight">
+                  {selectedProject.title}
+                </h3>
+              </div>
+
+              {/* Dashboard Preview Image */}
+              <div className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-950 shadow-md">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-auto max-h-[500px] object-contain mx-auto"
+                />
+              </div>
+
+              {/* Overview */}
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Overview</h4>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm md:text-base leading-relaxed">
+                  {selectedProject.description}
+                </p>
+              </div>
+
+              {/* Key Outcomes */}
+              {selectedProject.keyOutcomes && selectedProject.keyOutcomes.length > 0 && (
+                <div className="space-y-3 pt-2">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400">Key Outcomes</h4>
+                  <ul className="space-y-2.5">
+                    {selectedProject.keyOutcomes.map((outcome, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        <span className="w-2 h-2 rounded-full bg-teal-500 dark:bg-teal-400 mt-2 flex-shrink-0" />
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Tech Stack & Action Links Footer */}
+              <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mr-2">Tech Stack:</span>
+                  {selectedProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-semibold"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {selectedProject.hasVideoDemo && (
+                    <a
+                      href={selectedProject.videoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-5 py-2.5 rounded-full bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-all inline-flex items-center gap-1.5 shadow-xs"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      <span>Project Tutorial (Video)</span>
+                    </a>
+                  )}
+
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-5 py-2.5 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
+                  >
+                    <span>View Project Code</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }

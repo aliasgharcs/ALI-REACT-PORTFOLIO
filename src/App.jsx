@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About'; 
 import TechStack from './components/TechStack';
 import Experience from './components/Experience';
+import Education from './components/Education';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import DataBackground from './components/DataBackground';
@@ -42,6 +43,7 @@ export default function App() {
         <About />
         <TechStack />
         <Experience />
+        <Education />
         <Projects />
         <Certifications />
         <Contact />

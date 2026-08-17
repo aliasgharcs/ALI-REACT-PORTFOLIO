@@ -7,41 +7,40 @@ export default function Experience() {
   const experienceData = [
     {
       role: 'Data Analytics (Work Study)',
-      company: 'Coloplast • Hamburg, Germany (On-site)',
+      company: 'Coloplast • Hamburg, Germany',
       period: 'Apr 2026 – Present',
       bullets: [
-        'Supported development and maintenance of ETL/ELT pipelines using Python & SQL for data ingestion from REST APIs, CSV files, and CRM sources into Azure Lakehouse Architecture.',
-        'Built and optimized PySpark transformation jobs in Azure Databricks with incremental loading to improve pipeline performance, reducing data refresh times by 50%.',
-        'Maintained Apache Airflow DAGs to orchestrate scheduled data pipelines from various sources with robust dependency management and automated monitoring for incoming sales data from B2B pharmaceutical handlers.',
-        'Contributed to CI/CD pipeline validation in Azure DevOps environments across Dev/QA deployment branches.',
-        'Implemented rigorous data quality validation, schema verification checks, and source reconciliation runs, while supporting Star Schema data models to scale Power BI reporting reliability.',
-        'Gathered explicit cross-department business requirements and engineered custom Power BI dashboards tracking 15+ complex KPIs for sales forecasting, month-end closing, and incentive metrics for Finance and ComEx teams.',
-        'Collaborated closely with senior BP Controlling and Finance leaders to translate financial goals into structured reporting engines covering forecasting accuracy, rebate structures, and fiscal target tracking.'
+        'Build and maintain ETL/ELT pipelines using Python and SQL, ingesting data from REST APIs, CSV files, and CRM sources into Azure Lakehouse Architecture.',
+        'Optimize PySpark transformation jobs in Azure Databricks with incremental loading, cutting data refresh times by 50%.',
+        'Orchestrate scheduled data pipelines using Apache Airflow DAGs with robust dependency management and automated monitoring for B2B pharmaceutical sales data.',
+        'Contribute to CI/CD pipeline validation in Azure DevOps across Dev/QA deployment branches.',
+        'Implement rigorous data quality validation, schema verification, and source reconciliation to support Star Schema data models for reliable Power BI reporting.',
+        'Partner with senior BP Controlling and Finance leaders to translate business goals into custom Power BI dashboards tracking 15+ KPIs for sales forecasting, month-end closing, and incentive metrics.'
       ]
     },
     {
       role: 'Research Assistant',
       company: 'Urban Electric Mobility Initiative • Berlin, Germany',
-      period: 'May 2025 – Oct 2025',
+      period: 'May 2025 – October 2025',
       bullets: [
-        'Built Power BI dashboards to visualize global mobility data for strategic policy and decision-making.',
-        'Developed interactive spatial maps leveraging Leaflet.js, GeoJSON formatting, and Mapbox GL frameworks.',
-        'Managed critical data cleaning, taxonomy structuring, and production content migration across enterprise platforms including WordPress, Wix, and Tutor LMS.',
-        'Created high-impact landing pages for e-mobility key performance indicators (KPIs) and integrated structured learning modules.',
-        'Diagnosed and resolved complex data integrity and user interface bottlenecks, directly improving platform cross-consistency and usability.'
+        'Designed Power BI dashboards to visualize global mobility data for policy and decision-making.',
+        'Developed interactive maps using Leaflet.js, GeoJSON, and Mapbox GL.',
+        'Managed data cleaning, taxonomy structuring, and content migration across WordPress, Wix, and Tutor LMS platforms.',
+        'Created landing pages for e-mobility topics featuring KPIs and learning modules.',
+        'Resolved data integrity and UI issues, improving platform consistency and usability.'
       ]
     },
     {
       role: 'Data Analyst (Intern)',
-      company: 'Devigners • United States (Remote)',
-      period: 'Feb 2023 – Nov 2023',
+      company: 'Devigners • Remote (United States)',
+      period: 'February 2023 – November 2023',
       bullets: [
-        'Built optimized ETL pipelines using Python scripting, raw SQL queries, and Excel to clean and prepare massive datasets for operational reporting.',
-        'Conducted granular exploratory data analysis to isolate underlying trends and establish fundamental business key performance indicators (KPIs).',
-        'Performed advanced statistical analysis on core KPIs using Python mathematical libraries (NumPy, StatsModels) to map performance drivers.',
-        'Architected interactive analytics dashboards in Power BI utilizing specialized Power Query models and custom DAX calculations.',
-        'Translated complex statistical outputs into actionable visualizations and shared reports, enabling cross-functional leadership to make faster data-driven decisions.',
-        'Collaborated closely within agile sprints using JIRA for task tracking and managed code distribution pipelines using Git/GitHub.'
+        'Built ETL pipelines using Python, SQL, and Excel to clean and prepare data for reporting.',
+        'Conducted data analysis to explore trends and identify key performance indicators.',
+        'Performed statistical analysis on KPIs using Python (NumPy, StatsModels) to uncover performance drivers.',
+        'Created interactive dashboards in Power BI with Power Query and DAX for custom calculations.',
+        'Shared insights through reports and visualizations, enabling faster, informed decisions.',
+        'Managed tasks with Jira and tracked code changes using Git in a collaborative team environment.'
       ]
     }
   ];
@@ -61,7 +60,7 @@ export default function Experience() {
             Professional Experience
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
-            My professional journey and key achievements in various data roles.
+            My professional journey and key achievements across data roles.
           </p>
         </div>
 
@@ -78,7 +77,7 @@ export default function Experience() {
                 onClick={() => handleToggle(index)}
               >
                 
-                {/* Timeline Node Point (Briefcase Indicator) */}
+                {/* Timeline Node Point */}
                 <span className={`absolute -left-[45px] md:-left-[61px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
                   isExpanded 
                     ? 'bg-teal-500 dark:bg-teal-400 text-white scale-110' 
@@ -108,7 +107,7 @@ export default function Experience() {
                         {exp.company}
                       </div>
                       
-                      {/* Calendar Date Badge Component */}
+                      {/* Calendar Date Badge */}
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-xs font-bold text-zinc-500 dark:text-zinc-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
@@ -125,14 +124,13 @@ export default function Experience() {
                     </span>
                   </div>
 
-                  {/* Tap hint text (shows when collapsed) */}
                   {!isExpanded && (
                     <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-3 font-medium">
                       Tap to view details →
                     </p>
                   )}
 
-                  {/* Expandable Bullet List Content Container */}
+                  {/* Expandable Bullet List */}
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                     isExpanded 
                       ? 'max-h-[800px] opacity-100 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800' 
