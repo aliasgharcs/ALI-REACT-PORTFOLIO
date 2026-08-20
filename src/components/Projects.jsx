@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { ExternalLink, Play, X } from 'lucide-react';
+import { fadeInUp, scaleIn, staggerContainer, staggerItem, viewportOnce, EASE } from '../lib/motionVariants';
+
+function getResourceLabel(url) {
+  if (!url) return 'View Project';
+  if (url.includes('drive.google.com')) return url.includes('/folders/') ? 'View Folder' : 'View on Drive';
+  if (url.includes('docs.google.com')) return 'View Report';
+  if (url.includes('colab.research.google.com')) return 'Open Notebook';
+  return 'View Project';
+}
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
+  const gridWrapperRef = useRef(null);
+  const gridInView = useInView(gridWrapperRef, { once: true, margin: '-80px' });
 
   const categories = [
     'All',
@@ -48,7 +61,7 @@ export default function Projects() {
       ],
       image: '/projects/pizza_sales.png',
       tags: ['SQL', 'Power BI'],
-      githubUrl: 'https://docs.google.com/document/d/1JBzclJ7k1IkfVbKZikd7qsl3oQ4C6ciS/edit?usp=sharing&ouid=100813421651381708894&rtpof=true&sd=true'
+      githubUrl: 'https://drive.google.com/file/d/1F_ttyfyyUIlI5BFIzPU_zWah2JFAwtSH/view?usp=sharing'
     },
     {
       id: 3,
@@ -88,12 +101,12 @@ export default function Projects() {
     },
     {
       id: 5,
-      title: 'HR Analytics Dashboard BI',
+      title: 'HR Analytics Dashboard',
       category: 'HR',
       featured: false,
       hasVideoDemo: true,
       videoUrl: 'https://drive.google.com/file/d/1X-etQkpzY5QpqGFrZlOimb0kF8OS0ZZr/view?usp=sharing',
-      description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
+      description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies, delivered as both a Power BI dashboard and a supporting Excel workbook.',
       keyOutcomes: [
         'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
         'Developed complex DAX measures for attrition rate, average age, salary, and tenure.',
@@ -101,29 +114,11 @@ export default function Projects() {
         'Identified significant turnover spikes during Year 1 and in lower salary bands, directly shaping onboarding and compensation strategies.'
       ],
       image: '/projects/hr_analytics_bi.png',
-      tags: ['Power BI', 'DAX'],
-      githubUrl: 'https://drive.google.com/file/d/1Pz4fPOCYtVhRO7fGPtteR9gLpWUmXXDb/view?usp=sharing'
-    },
-    {
-      id: 6,
-      title: 'HR Analytics Dashboard Excel',
-      category: 'HR',
-      featured: false,
-      hasVideoDemo: true,
-      videoUrl: 'https://drive.google.com/file/d/1X-etQkpzY5QpqGFrZlOimb0kF8OS0ZZr/view?usp=sharing',
-      description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
-      keyOutcomes: [
-        'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
-        'Developed complex DAX measures for attrition rate, average age, salary, and tenure.',
-        'Designed an interactive dashboard cross-tabulating job roles against satisfaction scores, education, and age distributions.',
-        'Identified significant turnover spikes during Year 1 and in lower salary bands, directly shaping onboarding and compensation strategies.'
-      ],
-      image: '/projects/hr_analytics_excel.png',
       tags: ['Power BI', 'DAX', 'Excel'],
       githubUrl: 'https://drive.google.com/file/d/1Pz4fPOCYtVhRO7fGPtteR9gLpWUmXXDb/view?usp=sharing'
     },
     {
-      id: 7,
+      id: 6,
       title: 'Global EV Policy & Sustainability Dashboard',
       category: 'Operations',
       featured: false,
@@ -140,7 +135,7 @@ export default function Projects() {
       githubUrl: 'https://drive.google.com/file/d/1zOsOsNEMcfJ2eUE0Ij5Qbsyh4_rBORRg/view?usp=sharing'
     },
     {
-      id: 8,
+      id: 7,
       title: 'E-Commerce Store Analytics',
       category: 'Sales',
       featured: false,
@@ -157,7 +152,7 @@ export default function Projects() {
       githubUrl: 'https://drive.google.com/file/d/1FfRhOZplGNYN4dTclAcZhDYUA-X6wjF0/view?usp=sharing'
     },
     {
-      id: 9,
+      id: 8,
       title: 'Big Data Analytics with Apache Spark',
       category: 'AI & ML',
       featured: false,
@@ -174,7 +169,7 @@ export default function Projects() {
       githubUrl: 'https://colab.research.google.com/drive/1YJ_IvbhP3b4Y17PhlFUmGO_pD__GICy2?usp=sharing'
     },
     {
-      id: 10,
+      id: 9,
       title: 'Gender & Age Detection System',
       category: 'AI & ML',
       featured: false,
@@ -204,7 +199,13 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header Section */}
-        <div className="text-center space-y-4 mb-12">
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center space-y-4 mb-12"
+        >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
             Featured Projects
@@ -212,16 +213,17 @@ export default function Projects() {
           <p className="text-zinc-500 dark:text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-medium">
             Explore real-world data analytics & BI dashboards transforming complex raw records into strategic, actionable business decisions.
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-16">
           {categories.map((cat) => {
             const isActive = activeFilter === cat;
             return (
-              <button
+              <motion.button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
+                whileTap={{ scale: 0.95 }}
                 className={`px-5 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 cursor-pointer ${
                   isActive
                     ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
@@ -229,17 +231,22 @@ export default function Projects() {
                 }`}
               >
                 {cat}
-              </button>
+              </motion.button>
             );
           })}
         </div>
 
         {/* Dynamic Project Display Grid */}
-        <div className="space-y-8">
-          
+        <div className="space-y-8" ref={gridWrapperRef}>
+
           {/* Featured Large Hero Card */}
           {featuredProject && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group">
+            <motion.div
+              key={`featured-${activeFilter}`}
+              variants={scaleIn}
+              initial="hidden"
+              animate={gridInView ? 'visible' : 'hidden'}
+              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group">
               <div 
                 className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-zinc-900 cursor-pointer"
                 onClick={() => setSelectedProject(featuredProject)}
@@ -290,13 +297,11 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs md:text-sm transition-all shadow-xs"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
+                      <Play className="w-4 h-4" fill="currentColor" />
                       <span>Project Tutorial (Video)</span>
                     </a>
                   )}
-                  
+
                   <button
                     onClick={() => setSelectedProject(featuredProject)}
                     className="inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm transition-all cursor-pointer shadow-xs"
@@ -305,14 +310,21 @@ export default function Projects() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Standard Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            key={`grid-${activeFilter}`}
+            variants={staggerContainer()}
+            initial="hidden"
+            animate={gridInView ? 'visible' : 'hidden'}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {standardProjects.map((project) => (
-              <div
+              <motion.div
                 key={project.id}
+                variants={staggerItem}
                 className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
@@ -332,9 +344,7 @@ export default function Projects() {
 
                     {project.hasVideoDemo && (
                       <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-600/90 text-white backdrop-blur-md flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-3 h-3">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
+                        <Play className="w-3 h-3" fill="currentColor" />
                         Video Demo
                       </span>
                     )}
@@ -375,9 +385,7 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-3.5 h-3.5">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
+                      <Play className="w-3.5 h-3.5" fill="currentColor" />
                       <span>Project Tutorial</span>
                     </a>
                   ) : (
@@ -387,8 +395,8 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold text-xs transition-all"
                     >
-                      <span>GitHub</span>
-                      <span>→</span>
+                      <span>{getResourceLabel(project.githubUrl)}</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
 
@@ -399,21 +407,30 @@ export default function Projects() {
                     Project Details
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
 
       </div>
 
       {/* Project Details Modal */}
-      {selectedProject && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
-          onClick={() => setSelectedProject(null)}
-        >
-          <div 
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-md overflow-y-auto"
+            onClick={() => setSelectedProject(null)}
+          >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ duration: 0.25, ease: EASE }}
             className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl my-8 relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -422,9 +439,7 @@ export default function Projects() {
               onClick={() => setSelectedProject(null)}
               className="absolute top-6 right-6 p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
+              <X className="w-5 h-5" />
             </button>
 
             {/* Modal Content */}
@@ -493,9 +508,7 @@ export default function Projects() {
                       rel="noreferrer"
                       className="px-5 py-2.5 rounded-full bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-all inline-flex items-center gap-1.5 shadow-xs"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
+                      <Play className="w-4 h-4" fill="currentColor" />
                       <span>Project Tutorial (Video)</span>
                     </a>
                   )}
@@ -506,16 +519,17 @@ export default function Projects() {
                     rel="noreferrer"
                     className="px-5 py-2.5 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
                   >
-                    <span>View Project Details</span>
-                    <span>→</span>
+                    <span>{getResourceLabel(selectedProject.githubUrl)}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
             </div>
 
-          </div>
-        </div>
-      )}
+          </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </section>
   );

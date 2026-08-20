@@ -1,4 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { MapPin } from 'lucide-react';
+import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
 
 export default function Education() {
   const educationList = [
@@ -23,7 +26,13 @@ export default function Education() {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center space-y-4 mb-16"
+        >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
             Education
@@ -31,13 +40,20 @@ export default function Education() {
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
             Academic background and specialized coursework in Computer Science and Artificial Intelligence.
           </p>
-        </div>
+        </motion.div>
 
         {/* Education 2-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div
+          variants={staggerContainer()}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
           {educationList.map((edu, idx) => (
-            <div
+            <motion.div
               key={idx}
+              variants={staggerItem}
               className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 space-y-6 shadow-xs hover:shadow-xl transition-all duration-300 relative group overflow-hidden"
             >
               {/* Subtle top accent line */}
@@ -66,12 +82,13 @@ export default function Education() {
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium">
-                {edu.description}
+              <p className="flex items-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-400 font-medium">
+                <MapPin className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
+                {edu.location}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

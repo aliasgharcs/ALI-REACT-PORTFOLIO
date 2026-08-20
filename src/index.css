@@ -4,6 +4,16 @@
 /* Force Tailwind v4 to toggle dark mode via .dark class instead of system settings */
 @variant dark (&:where(.dark, .dark *));
 
+/*
+  Color convention:
+  - teal-500/600 (light) / teal-400 (dark) = primary accent for CTAs, active nav state, links.
+  - blue -> indigo -> purple gradient = reserved for the Hero headline only, not spread elsewhere.
+  - Category-color-coded pills (TechStack, About skills) intentionally keep distinct hues per
+    category (amber, emerald, sky, rose, purple, etc.) - that's functional color-coding, not
+    ad-hoc drift, and should stay that way rather than being consolidated to teal.
+  - zinc = all neutral surface/text/border colors.
+*/
+
 html {
   scroll-behavior: smooth;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;

@@ -1,4 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Lock } from 'lucide-react';
+import { fadeIn, fadeInUp, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
 
 export default function Certifications() {
   const stats = [
@@ -34,7 +37,7 @@ export default function Certifications() {
     {
       id: 3,
       title: 'Certificate Of Appreciation',
-      issuer: 'BTU Cottbus',
+      issuer: 'Bahria University',
       issuerShort: 'B',
       issuerBg: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-400',
       date: 'Fall 2021',
@@ -50,7 +53,13 @@ export default function Certifications() {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Top Header Section */}
-        <div className="text-center space-y-4 mb-16">
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center space-y-4 mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800/50 text-teal-600 dark:text-teal-400 text-xs font-bold tracking-wide">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
@@ -61,16 +70,22 @@ export default function Certifications() {
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
             Certifications & <span className="text-teal-600 dark:text-teal-400">Honors</span>
           </h2>
-          
+
           <div className="w-16 h-1 bg-teal-500/60 mx-auto rounded-full" />
 
           <p className="text-zinc-500 dark:text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-medium">
             Verified credentials and academic recognition for excellence in data analytics and artificial intelligence.
           </p>
-        </div>
+        </motion.div>
 
         {/* Highlight Metrics Banner */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-8 mb-16 shadow-xs">
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-8 mb-16 shadow-xs"
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x-0 md:divide-x divide-zinc-100 dark:divide-zinc-800">
             {stats.map((stat, idx) => (
               <div key={idx} className="space-y-1">
@@ -83,13 +98,20 @@ export default function Certifications() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Certifications 3-Column Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div
+          variants={staggerContainer()}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {certificationsData.map((cert) => (
-            <div
+            <motion.div
               key={cert.id}
+              variants={staggerItem}
               className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
@@ -149,21 +171,28 @@ export default function Certifications() {
 
               {/* Verify Credential Button */}
               <div className="p-6 pt-0">
-                <a
-                  href={cert.verifyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 text-teal-600 dark:text-teal-400 hover:bg-teal-50/50 dark:hover:bg-zinc-800/50 text-xs font-bold transition-all flex items-center justify-center gap-1.5 group-hover:border-teal-500/40"
-                >
-                  <span>Verify Credential Link</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                  </svg>
-                </a>
+                {cert.verifyUrl ? (
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 text-teal-600 dark:text-teal-400 hover:bg-teal-50/50 dark:hover:bg-zinc-800/50 text-xs font-bold transition-all flex items-center justify-center gap-1.5 group-hover:border-teal-500/40"
+                  >
+                    <span>Verify Credential Link</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                  </a>
+                ) : (
+                  <span className="w-full py-2.5 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-600 text-xs font-bold flex items-center justify-center gap-1.5 cursor-not-allowed opacity-70">
+                    <Lock className="w-3.5 h-3.5" />
+                    <span>No Public Credential</span>
+                  </span>
+                )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

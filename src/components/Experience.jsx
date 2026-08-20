@@ -1,4 +1,11 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { fadeInUp, staggerContainer, viewportOnce, EASE } from '../lib/motionVariants';
+
+const timelineItem = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
 export default function Experience() {
   // Tracks which card index is currently expanded (click to toggle)
@@ -54,7 +61,13 @@ export default function Experience() {
       <div className="max-w-4xl mx-auto px-6">
         
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-20">
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center space-y-4 mb-20"
+        >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
             Professional Experience
@@ -62,23 +75,30 @@ export default function Experience() {
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
             My professional journey and key achievements across data roles.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Layout Container */}
-        <div className="relative border-l-2 border-zinc-200 dark:border-zinc-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-8">
-          
+        <motion.div
+          variants={staggerContainer(0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="relative border-l-2 border-zinc-200 dark:border-zinc-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-8"
+        >
+
           {experienceData.map((exp, index) => {
             const isExpanded = expandedIndex === index;
-            
+
             return (
-              <div 
-                key={index} 
+              <motion.div
+                key={index}
+                variants={timelineItem}
                 className="relative group cursor-pointer"
                 onClick={() => handleToggle(index)}
               >
                 
                 {/* Timeline Node Point */}
-                <span className={`absolute -left-[45px] md:-left-[61px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
+                <span className={`absolute -left-[69px] md:-left-[68px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
                   isExpanded 
                     ? 'bg-teal-500 dark:bg-teal-400 text-white scale-110' 
                     : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'
@@ -131,27 +151,33 @@ export default function Experience() {
                   )}
 
                   {/* Expandable Bullet List */}
-                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isExpanded 
-                      ? 'max-h-[800px] opacity-100 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800' 
-                      : 'max-h-0 opacity-0 pointer-events-none'
-                  }`}>
-                    <ul className="space-y-4">
-                      {exp.bullets.map((bullet, bIdx) => (
-                        <li key={bIdx} className="flex items-start gap-3 text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400 mt-2.5 flex-shrink-0" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: EASE }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="space-y-4 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800">
+                          {exp.bullets.map((bullet, bIdx) => (
+                            <li key={bIdx} className="flex items-start gap-3 text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
+                              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400 mt-2.5 flex-shrink-0" />
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                 </div>
-              </div>
+              </motion.div>
             );
           })}
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

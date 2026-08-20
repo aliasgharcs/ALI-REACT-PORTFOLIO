@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
 
 export default function TechStack() {
   const skillCategories = [
@@ -63,7 +65,13 @@ export default function TechStack() {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-center space-y-4 mb-16"
+        >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
             Skills & Languages
@@ -71,13 +79,20 @@ export default function TechStack() {
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
             My technical stack, tools, databases, software, and spoken languages.
           </p>
-        </div>
+        </motion.div>
 
         {/* 6-Category Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={staggerContainer()}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {skillCategories.map((cat, idx) => (
-            <div 
-              key={idx} 
+            <motion.div
+              key={idx}
+              variants={staggerItem}
               className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl space-y-6 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div className="space-y-6">
@@ -89,11 +104,11 @@ export default function TechStack() {
                     {cat.title}
                   </h3>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-2">
                   {cat.skills.map((skill) => (
-                    <span 
-                      key={skill} 
+                    <span
+                      key={skill}
                       className="text-xs bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/80 dark:border-zinc-700/80 text-zinc-700 dark:text-zinc-300 px-3.5 py-2 rounded-xl font-bold shadow-2xs transition-colors hover:border-teal-500/50 hover:text-teal-600 dark:hover:text-teal-400"
                     >
                       {skill}
@@ -101,9 +116,9 @@ export default function TechStack() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>
