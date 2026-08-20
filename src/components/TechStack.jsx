@@ -13,7 +13,7 @@ export default function TechStack() {
     },
     {
       title: "Programming Languages",
-      skills: ["Python", "SQL", "JavaScript", "DAX", "Power Query (M)"],
+      skills: ["Python", "SQL", "DAX", "Power Query (M)"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-purple-500">
           <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
@@ -31,7 +31,7 @@ export default function TechStack() {
     },
     {
       title: "Software & Tools",
-      skills: ["Primavera P6", "JIRA", "Asana", "Kanban Board", "Git & GitHub", "Azure DevOps"],
+      skills: ["Salesforce", "Git & GitHub", "Azure DevOps"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-rose-500">
           <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-2.31c.421-.304.912-.477 1.424-.504l4.577-.246a2.036 2.036 0 0 0 1.93-1.93l-.246-4.577a2.036 2.036 0 0 0-.504-1.424l-3.32-3.32a2.036 2.036 0 0 0-1.424-.504l-4.577.246a2.036 2.036 0 0 0-1.93 1.93l.246 4.577c.027.512.2 1.003.504 1.424l3.32 3.32Z" />

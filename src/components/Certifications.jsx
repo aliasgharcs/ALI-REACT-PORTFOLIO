@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Certifications() {
   const stats = [
-    { number: '600+', label: 'Learning Hours' },
+    { number: '10+', label: 'Learning Hours' },
     { number: '3', label: 'Key Certifications' },
-    { number: '5+', label: 'Learning Platforms' },
+    { number: '2+', label: 'Learning Platforms' },
     { number: '10+', label: 'Projects Completed' }
   ];
 
@@ -41,7 +41,7 @@ export default function Certifications() {
       skills: 'Artificial Intelligence, Machine Learning, Semester Project Excellence',
       note: "Certificate for hard work and dedication to the semester project of Fall'2021 for Artificial Intelligence.",
       previewBg: 'from-purple-900/80 to-violet-900/90',
-      verifyUrl: 'https://github.com/aliasgharcs'
+      verifyUrl: ''
     }
   ];
 

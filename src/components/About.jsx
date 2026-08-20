@@ -40,7 +40,7 @@ export default function About() {
               <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">Projects Completed</div>
             </div>
             <div>
-              <div className="text-6xl font-black text-zinc-900 dark:text-white tracking-tight">3+</div>
+              <div className="text-6xl font-black text-zinc-900 dark:text-white tracking-tight">1+</div>
               <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">Years Experience</div>
             </div>
           </div>

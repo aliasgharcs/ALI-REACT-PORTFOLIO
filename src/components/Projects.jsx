@@ -20,7 +20,7 @@ export default function Projects() {
       category: 'Operations',
       featured: true,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1OgofT3FmaIxxawTGUEF5MHbLqjSZyrw9/view?usp=sharing',
       description: "Analyzed over 71,000 charging points across nearly 5,000 operators to map Germany's electric vehicle charging landscape, identifying market fragmentation, infrastructure gaps, and growth patterns.",
       keyOutcomes: [
         'Collected, cleaned, and standardized three decades of historical charging point data using Python.',
@@ -30,7 +30,7 @@ export default function Projects() {
       ],
       image: '/projects/ev_charging_de.png',
       tags: ['Python', 'Power BI', 'DAX', 'Excel'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1twY41H_kcptbCJ1cQaqcbIuQPfVo8Wl-/view?usp=sharing'
     },
     {
       id: 2,
@@ -38,7 +38,7 @@ export default function Projects() {
       category: 'Sales',
       featured: false,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1gaC7SZKFn7P2cSSFXz6-9Pkzq-IH6X43/view?usp=sharing',
       description: 'Developed a dynamic sales dashboard to transform messy raw order logs into actionable insights, helping business owners understand customer behavior, optimize inventory, and boost profitability.',
       keyOutcomes: [
         'Imported, cleaned, and standardized CSV sales data using SQL and Power BI, rectifying inconsistent date/time formats and missing values.',
@@ -48,7 +48,7 @@ export default function Projects() {
       ],
       image: '/projects/pizza_sales.png',
       tags: ['SQL', 'Power BI'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://docs.google.com/document/d/1JBzclJ7k1IkfVbKZikd7qsl3oQ4C6ciS/edit?usp=sharing&ouid=100813421651381708894&rtpof=true&sd=true'
     },
     {
       id: 3,
@@ -56,7 +56,7 @@ export default function Projects() {
       category: 'Finance',
       featured: false,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1d24ipoZUnNEDQnumes7IuvY7Bk1DuI5g/view?usp=sharing',
       description: 'Built a comprehensive loan management dashboard to visualize application volume, funded amounts, payment status, and interest rates, enabling the bank to assess risk and optimize loan offerings.',
       keyOutcomes: [
         'Imported scattered CSV loan data into SQL Server for structured querying and connected it to Tableau for visualization.',
@@ -66,7 +66,7 @@ export default function Projects() {
       ],
       image: '/projects/bank_loan.png',
       tags: ['Tableau', 'SQL Server', 'SQL'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/drive/folders/1S2l0_uA9WJ9utRefrmj3K3udwVOm-4_P?hl=de'
     },
     {
       id: 4,
@@ -74,7 +74,7 @@ export default function Projects() {
       category: 'Operations',
       featured: false,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1aWMQwjZiSls8npitF0c008saqFb2BBBP/view?usp=sharing',
       description: 'Created a comprehensive accident tracking dashboard visualizing severity, hotspots, and causal trends across time, vehicle types, and weather conditions to aid evidence-based safety planning.',
       keyOutcomes: [
         'Aggregated and cleaned disparate CSV accident reports in Excel, handling missing values through imputation and correcting inconsistent severity labels.',
@@ -84,7 +84,7 @@ export default function Projects() {
       ],
       image: '/projects/road_accident.jpg',
       tags: ['Excel'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1k6hkV0ILEBRAVV0frDfwoIOdwc24uTb1/view?usp=sharing'
     },
     {
       id: 5,
@@ -92,7 +92,7 @@ export default function Projects() {
       category: 'HR',
       featured: false,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1X-etQkpzY5QpqGFrZlOimb0kF8OS0ZZr/view?usp=sharing',
       description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
       keyOutcomes: [
         'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
@@ -102,7 +102,7 @@ export default function Projects() {
       ],
       image: '/projects/hr_analytics_bi.png',
       tags: ['Power BI', 'DAX'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1Pz4fPOCYtVhRO7fGPtteR9gLpWUmXXDb/view?usp=sharing'
     },
     {
       id: 6,
@@ -110,7 +110,7 @@ export default function Projects() {
       category: 'HR',
       featured: false,
       hasVideoDemo: true,
-      videoUrl: 'https://github.com/aliasgharcs',
+      videoUrl: 'https://drive.google.com/file/d/1X-etQkpzY5QpqGFrZlOimb0kF8OS0ZZr/view?usp=sharing',
       description: 'Developed a comprehensive workforce analytics dashboard uncovering the drivers behind employee turnover, empowering HR leaders to transition from reactive hiring to proactive retention strategies.',
       keyOutcomes: [
         'Built a Star Schema data model in Power BI using the IBM HR Analytics dataset, centralized around a Fact_Employee table.',
@@ -120,7 +120,7 @@ export default function Projects() {
       ],
       image: '/projects/hr_analytics_excel.png',
       tags: ['Power BI', 'DAX', 'Excel'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1Pz4fPOCYtVhRO7fGPtteR9gLpWUmXXDb/view?usp=sharing'
     },
     {
       id: 7,
@@ -137,7 +137,7 @@ export default function Projects() {
       ],
       image: '/projects/global_ev_policy.png',
       tags: ['Power BI', 'SQL', 'Excel'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1zOsOsNEMcfJ2eUE0Ij5Qbsyh4_rBORRg/view?usp=sharing'
     },
     {
       id: 8,
@@ -154,7 +154,7 @@ export default function Projects() {
       ],
       image: '/projects/ecommerce_looker.png',
       tags: ['Looker Studio'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1FfRhOZplGNYN4dTclAcZhDYUA-X6wjF0/view?usp=sharing'
     },
     {
       id: 9,
@@ -171,7 +171,7 @@ export default function Projects() {
       ],
       image: '/projects/spark_diabetes.png',
       tags: ['Apache Spark', 'PySpark', 'MLlib', 'Python', 'Big Data'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://colab.research.google.com/drive/1YJ_IvbhP3b4Y17PhlFUmGO_pD__GICy2?usp=sharing'
     },
     {
       id: 10,
@@ -188,7 +188,7 @@ export default function Projects() {
       ],
       image: '/projects/gender_age_cnn.png',
       tags: ['OpenCV', 'Deep Learning', 'Caffe', 'TensorFlow', 'Python'],
-      githubUrl: 'https://github.com/aliasgharcs'
+      githubUrl: 'https://drive.google.com/file/d/1iVt13EAToU-gt3eTtPC12PWO0VEbXGUd/view?usp=sharing'
     }
   ];
 
@@ -506,7 +506,7 @@ export default function Projects() {
                     rel="noreferrer"
                     className="px-5 py-2.5 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
                   >
-                    <span>View Project Code</span>
+                    <span>View Project Details</span>
                     <span>→</span>
                   </a>
                 </div>

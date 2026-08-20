@@ -7,7 +7,6 @@ export default function Education() {
       institution: 'Brandenburgische Technische Universität Cottbus',
       location: 'Cottbus, Germany',
       period: 'October 2023 – Present',
-      description: 'Focusing on Machine Learning, Deep Learning, Neural Networks, Computer Vision, and Advanced Statistical Methods.',
       iconBg: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20'
     },
     {
@@ -15,7 +14,6 @@ export default function Education() {
       institution: 'Bahria University Karachi',
       location: 'Karachi, Pakistan',
       period: 'February 2019 – February 2023',
-      description: 'Core foundation in Computer Science, Database Architecture, Software Engineering, Data Structures & Algorithms.',
       iconBg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'
     }
   ];
