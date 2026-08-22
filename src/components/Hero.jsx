@@ -38,7 +38,7 @@ export default function Hero() {
           {/* Action Link Row */}
           <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-4 pt-4">
             <motion.a
-              href="https://drive.google.com/file/d/1zH8N_6VDvTXL5wpue0u9y3RJKKMN9sQX/view?usp=sharing"
+              href="https://drive.google.com/file/d/1JU1dHwHBw4bQ8PCI1rLkj5uk9sk5S0TT/view?usp=sharing"
               target="_blank"
               rel="noreferrer"
               whileHover={{ y: -2 }}
