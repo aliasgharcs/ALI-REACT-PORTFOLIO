@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { fadeIn, viewportOnce } from '../lib/motionVariants';
 import { GithubIcon, LinkedinIcon } from './icons/BrandIcons';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
   const socialLinks = [
     { label: 'GitHub', href: 'https://github.com/aliasgharcs', Icon: GithubIcon },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/aliiasghar', Icon: LinkedinIcon },
@@ -42,10 +44,10 @@ export default function Footer() {
         {/* Copyright */}
         <div className="text-center space-y-1">
           <p className="font-semibold text-sm text-zinc-500 dark:text-zinc-500">
-            &copy; {new Date().getFullYear()} Ali Asghar. All rights reserved.
+            &copy; {new Date().getFullYear()} Ali Asghar. {t('footer.rightsReserved')}
           </p>
           <p className="text-zinc-400 dark:text-zinc-500 text-xs font-medium">
-            Built with React & Tailwind CSS v4
+            {t('footer.builtWith')}
           </p>
         </div>
 

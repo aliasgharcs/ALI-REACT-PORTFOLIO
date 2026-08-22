@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import aliPhoto from '../assets/aliphoto1.jpeg';
 import { staggerContainer, staggerItem } from '../lib/motionVariants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
   return (
     <section id="home" className="min-h-[calc(100vh-4rem)] w-full flex items-center py-12 lg:py-0 relative overflow-hidden">
       {/* Ambient background accent panel */}
@@ -19,31 +21,31 @@ export default function Hero() {
           className="lg:col-span-7 space-y-8 text-left relative z-10"
         >
           <motion.div variants={staggerItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400">
-            Welcome to my portfolio
+            {t('hero.badge')}
           </motion.div>
 
           <motion.h1 variants={staggerItem} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white tracking-tight leading-[0.95]">
-            Hi, I'm <br />
+            {t('hero.greeting')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
               Ali Asghar
             </span>
           </motion.h1>
 
           <motion.h2 variants={staggerItem} className="text-2xl sm:text-3xl font-extrabold text-zinc-700 dark:text-zinc-300 tracking-tight">
-            Data Analyst & BI Developer
+            {t('hero.title')}
           </motion.h2>
 
           {/* Action Link Row */}
           <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-4 pt-4">
             <motion.a
-              href="https://drive.google.com/file/d/1IWYWf5FLerAvShgZfIX8_B6fgWxLGLHZ/view?usp=sharing"
+              href="https://drive.google.com/file/d/1zH8N_6VDvTXL5wpue0u9y3RJKKMN9sQX/view?usp=sharing"
               target="_blank"
               rel="noreferrer"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
               className="px-8 py-4 bg-zinc-950 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 text-xs font-bold tracking-widest uppercase rounded-full transition-colors shadow-xl"
             >
-              View Resume
+              {t('hero.viewResume')}
             </motion.a>
 
             <motion.a
@@ -52,7 +54,7 @@ export default function Hero() {
               whileTap={{ scale: 0.97 }}
               className="px-8 py-4 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-xs font-bold tracking-widest uppercase rounded-full transition-colors"
             >
-              Contact Me
+              {t('hero.contactMe')}
             </motion.a>
           </motion.div>
         </motion.div>

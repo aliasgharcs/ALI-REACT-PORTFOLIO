@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOnce, EASE } from '../lib/motionVariants';
+import { useLanguage } from '../i18n/LanguageContext';
+import { experienceText } from '../i18n/content';
 
 const timelineItem = {
   hidden: { opacity: 0, x: -20 },
@@ -8,47 +10,25 @@ const timelineItem = {
 };
 
 export default function Experience() {
+  const { language, t } = useLanguage();
   // Tracks which card index is currently expanded (click to toggle)
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const experienceData = [
     {
-      role: 'Data Analytics (Work Study)',
+      id: 'coloplast',
       company: 'Coloplast • Hamburg, Germany',
       period: 'Apr 2026 – Present',
-      bullets: [
-        'Build and maintain ETL/ELT pipelines using Python and SQL, ingesting data from REST APIs, CSV files, and CRM sources into Azure Lakehouse Architecture.',
-        'Optimize PySpark transformation jobs in Azure Databricks with incremental loading, cutting data refresh times by 50%.',
-        'Orchestrate scheduled data pipelines using Apache Airflow DAGs with robust dependency management and automated monitoring for B2B pharmaceutical sales data.',
-        'Contribute to CI/CD pipeline validation in Azure DevOps across Dev/QA deployment branches.',
-        'Implement rigorous data quality validation, schema verification, and source reconciliation to support Star Schema data models for reliable Power BI reporting.',
-        'Partner with senior BP Controlling and Finance leaders to translate business goals into custom Power BI dashboards tracking 15+ KPIs for sales forecasting, month-end closing, and incentive metrics.'
-      ]
     },
     {
-      role: 'Research Assistant',
+      id: 'urban-mobility',
       company: 'Urban Electric Mobility Initiative • Berlin, Germany',
       period: 'May 2025 – October 2025',
-      bullets: [
-        'Designed Power BI dashboards to visualize global mobility data for policy and decision-making.',
-        'Developed interactive maps using Leaflet.js, GeoJSON, and Mapbox GL.',
-        'Managed data cleaning, taxonomy structuring, and content migration across WordPress, Wix, and Tutor LMS platforms.',
-        'Created landing pages for e-mobility topics featuring KPIs and learning modules.',
-        'Resolved data integrity and UI issues, improving platform consistency and usability.'
-      ]
     },
     {
-      role: 'Data Analyst (Intern)',
+      id: 'devigners',
       company: 'Devigners • Remote (United States)',
       period: 'February 2023 – November 2023',
-      bullets: [
-        'Built ETL pipelines using Python, SQL, and Excel to clean and prepare data for reporting.',
-        'Conducted data analysis to explore trends and identify key performance indicators.',
-        'Performed statistical analysis on KPIs using Python (NumPy, StatsModels) to uncover performance drivers.',
-        'Created interactive dashboards in Power BI with Power Query and DAX for custom calculations.',
-        'Shared insights through reports and visualizations, enabling faster, informed decisions.',
-        'Managed tasks with Jira and tracked code changes using Git in a collaborative team environment.'
-      ]
     }
   ];
 
@@ -70,10 +50,10 @@ export default function Experience() {
         >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
-            Professional Experience
+            {t('experience.heading')}
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
-            My professional journey and key achievements across data roles.
+            {t('experience.subtitle')}
           </p>
         </motion.div>
 
@@ -88,6 +68,7 @@ export default function Experience() {
 
           {experienceData.map((exp, index) => {
             const isExpanded = expandedIndex === index;
+            const text = experienceText[language][exp.id];
 
             return (
               <motion.div
@@ -98,7 +79,7 @@ export default function Experience() {
               >
                 
                 {/* Timeline Node Point */}
-                <span className={`absolute -left-[69px] md:-left-[68px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
+                <span className={`absolute -left-[49px] md:-left-[68px] top-5 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-4 border-zinc-50 dark:border-[#09090b] shadow-sm transition-all duration-300 ${
                   isExpanded 
                     ? 'bg-teal-500 dark:bg-teal-400 text-white scale-110' 
                     : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'
@@ -121,7 +102,7 @@ export default function Experience() {
                       <h3 className={`text-xl md:text-2xl font-black tracking-tight transition-colors duration-300 ${
                         isExpanded ? 'text-teal-600 dark:text-teal-400' : 'text-zinc-950 dark:text-white'
                       }`}>
-                        {exp.role}
+                        {text.role}
                       </h3>
                       <div className="text-base font-bold text-zinc-600 dark:text-zinc-400">
                         {exp.company}
@@ -146,7 +127,7 @@ export default function Experience() {
 
                   {!isExpanded && (
                     <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-3 font-medium">
-                      Tap to view details →
+                      {t('experience.tapToViewDetails')}
                     </p>
                   )}
 
@@ -161,7 +142,7 @@ export default function Experience() {
                         className="overflow-hidden"
                       >
                         <ul className="space-y-4 mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800">
-                          {exp.bullets.map((bullet, bIdx) => (
+                          {text.bullets.map((bullet, bIdx) => (
                             <li key={bIdx} className="flex items-start gap-3 text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
                               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400 mt-2.5 flex-shrink-0" />
                               <span>{bullet}</span>

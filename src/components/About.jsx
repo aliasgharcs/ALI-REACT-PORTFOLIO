@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import doodleImg from '../assets/doodle.png';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const skillsList = [
   { name: 'Excel', category: 'Analytics', color: 'border-emerald-500/20 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5' },
@@ -15,6 +16,7 @@ const skillsList = [
 ];
 
 export default function About() {
+  const { t } = useLanguage();
   return (
     <section id="about" className="py-24 w-full bg-zinc-50 dark:bg-[#0a0a0c] border-y border-zinc-200/80 dark:border-zinc-900 relative overflow-hidden transition-colors duration-500">
       
@@ -34,10 +36,10 @@ export default function About() {
 
           <motion.div variants={staggerItem} className="space-y-6">
             <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-900 dark:text-white tracking-tight leading-[1.1]">
-              I turn messy data into <span className="text-teal-600 dark:text-teal-400">decisions that matter.</span>
+              {t('about.headingMain')} <span className="text-teal-600 dark:text-teal-400">{t('about.headingHighlight')}</span>
             </h3>
             <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl font-medium">
-              I'm a Data Analyst and BI Developer at Coloplast, building automated pipelines and business intelligence infrastructure for the COMEX team. Also pursuing my M.Sc. in AI at BTU Cottbus. I bridge raw records and corporate strategy — <span className="italic text-teal-600 dark:text-teal-400 font-semibold">"no noise, just signal"</span>.
+              {t('about.body')}<span className="italic text-teal-600 dark:text-teal-400 font-semibold">{t('about.bodyQuote')}</span>.
             </p>
           </motion.div>
 
@@ -45,11 +47,11 @@ export default function About() {
           <motion.div variants={staggerItem} className="flex gap-16 border-t border-zinc-200 dark:border-zinc-800/80 pt-8">
             <div>
               <div className="text-6xl font-black text-teal-600 dark:text-teal-400 tracking-tight">10+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">Projects Completed</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">{t('about.statsProjects')}</div>
             </div>
             <div>
               <div className="text-6xl font-black text-zinc-900 dark:text-white tracking-tight">2+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">Years Experience</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mt-2">{t('about.statsYears')}</div>
             </div>
           </motion.div>
 

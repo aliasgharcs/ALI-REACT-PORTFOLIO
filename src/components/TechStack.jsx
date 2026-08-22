@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
+import { useLanguage } from '../i18n/LanguageContext';
+import { skillsText } from '../i18n/content';
 
 export default function TechStack() {
+  const { language, t } = useLanguage();
   const skillCategories = [
     {
-      title: "Business Intelligence Tools",
+      key: 'bi-tools',
       skills: ["Power BI", "Tableau", "Looker Studio", "Advanced Excel"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-teal-500">
@@ -14,7 +17,7 @@ export default function TechStack() {
       )
     },
     {
-      title: "Programming Languages",
+      key: 'programming',
       skills: ["Python", "SQL", "DAX", "Power Query (M)"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-purple-500">
@@ -23,7 +26,7 @@ export default function TechStack() {
       )
     },
     {
-      title: "Database",
+      key: 'database',
       skills: ["MySQL", "BigQuery", "PostgreSQL", "MongoDB"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-blue-500">
@@ -32,7 +35,7 @@ export default function TechStack() {
       )
     },
     {
-      title: "Software & Tools",
+      key: 'software-tools',
       skills: ["Salesforce", "Git & GitHub", "Azure DevOps"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-rose-500">
@@ -41,7 +44,7 @@ export default function TechStack() {
       )
     },
     {
-      title: "Core Competencies",
+      key: 'core-competencies',
       skills: ["Data Analysis & Manipulation", "Data Visualization", "ETL/ELT Pipelines", "Statistical Analysis"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-amber-500">
@@ -50,7 +53,7 @@ export default function TechStack() {
       )
     },
     {
-      title: "Languages",
+      key: 'languages',
       skills: ["English (C1)", "German (A2)", "Urdu (Native)"],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-emerald-500">
@@ -74,10 +77,10 @@ export default function TechStack() {
         >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
-            Skills & Languages
+            {t('skills.heading')}
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
-            My technical stack, tools, databases, software, and spoken languages.
+            {t('skills.subtitle')}
           </p>
         </motion.div>
 
@@ -89,35 +92,38 @@ export default function TechStack() {
           viewport={viewportOnce}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {skillCategories.map((cat, idx) => (
-            <motion.div
-              key={idx}
-              variants={staggerItem}
-              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl space-y-6 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-            >
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 shrink-0">
-                    {cat.icon}
+          {skillCategories.map((cat) => {
+            const skills = skillsText[language]?.[cat.key] ?? cat.skills;
+            return (
+              <motion.div
+                key={cat.key}
+                variants={staggerItem}
+                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl space-y-6 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              >
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 shrink-0">
+                      {cat.icon}
+                    </div>
+                    <h3 className="text-lg font-black text-zinc-900 dark:text-white tracking-tight">
+                      {t(`skills.categories.${cat.key}`)}
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-black text-zinc-900 dark:text-white tracking-tight">
-                    {cat.title}
-                  </h3>
-                </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="text-xs bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/80 dark:border-zinc-700/80 text-zinc-700 dark:text-zinc-300 px-3.5 py-2 rounded-xl font-bold shadow-2xs transition-colors hover:border-teal-500/50 hover:text-teal-600 dark:hover:text-teal-400"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-xs bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/80 dark:border-zinc-700/80 text-zinc-700 dark:text-zinc-300 px-3.5 py-2 rounded-xl font-bold shadow-2xs transition-colors hover:border-teal-500/50 hover:text-teal-600 dark:hover:text-teal-400"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
 
       </div>

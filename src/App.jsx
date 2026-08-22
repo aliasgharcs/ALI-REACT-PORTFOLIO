@@ -12,6 +12,7 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 
 export default function App() {
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') === 'dark' || 
@@ -35,7 +36,7 @@ export default function App() {
       {/* Background tracks */}
       <DataBackground darkMode={darkMode} />
       
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} isHidden={isProjectModalOpen} />
       
       {/* Full-bleed layout engine */}
       <main className="w-full pt-16 relative z-10 flex flex-col">
@@ -44,7 +45,7 @@ export default function App() {
         <TechStack />
         <Experience />
         <Education />
-        <Projects />
+        <Projects onModalOpenChange={setIsProjectModalOpen} />
         <Certifications />
         <Contact />
       </main>

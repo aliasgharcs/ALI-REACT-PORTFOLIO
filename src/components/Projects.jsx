@@ -1,21 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink, Play, X } from 'lucide-react';
 import { fadeInUp, scaleIn, staggerContainer, staggerItem, viewportOnce, EASE } from '../lib/motionVariants';
+import { useLanguage } from '../i18n/LanguageContext';
+import { projectsText } from '../i18n/content';
 
-function getResourceLabel(url) {
-  if (!url) return 'View Project';
-  if (url.includes('drive.google.com')) return url.includes('/folders/') ? 'View Folder' : 'View on Drive';
-  if (url.includes('docs.google.com')) return 'View Report';
-  if (url.includes('colab.research.google.com')) return 'Open Notebook';
-  return 'View Project';
+function getResourceLabel(url, t) {
+  if (!url) return t('projects.resourceLabels.viewProject');
+  if (url.includes('drive.google.com')) return url.includes('/folders/') ? t('projects.resourceLabels.viewFolder') : t('projects.resourceLabels.viewOnDrive');
+  if (url.includes('docs.google.com')) return t('projects.resourceLabels.viewReport');
+  if (url.includes('colab.research.google.com')) return t('projects.resourceLabels.openNotebook');
+  return t('projects.resourceLabels.viewProject');
 }
 
-export default function Projects() {
+export default function Projects({ onModalOpenChange } = {}) {
+  const { language, t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
   const gridWrapperRef = useRef(null);
   const gridInView = useInView(gridWrapperRef, { once: true, margin: '-80px' });
+
+  useEffect(() => {
+    onModalOpenChange?.(Boolean(selectedProject));
+  }, [selectedProject, onModalOpenChange]);
 
   const categories = [
     'All',
@@ -193,6 +200,8 @@ export default function Projects() {
 
   const featuredProject = activeFilter === 'All' ? projectsData.find((p) => p.featured) : null;
   const standardProjects = filteredProjects.filter((p) => p.id !== (featuredProject ? featuredProject.id : null));
+  const featuredText = featuredProject ? projectsText[language][featuredProject.id] : null;
+  const selectedText = selectedProject ? projectsText[language][selectedProject.id] : null;
 
   return (
     <section id="projects" className="py-24 w-full bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500">
@@ -208,10 +217,10 @@ export default function Projects() {
         >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
-            Featured Projects
+            {t('projects.heading')}
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-base md:text-lg max-w-2xl mx-auto font-medium">
-            Explore real-world data analytics & BI dashboards transforming complex raw records into strategic, actionable business decisions.
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
@@ -230,7 +239,7 @@ export default function Projects() {
                     : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                 }`}
               >
-                {cat}
+                {t(`projects.categoryLabels.${cat}`)}
               </motion.button>
             );
           })}
@@ -253,15 +262,12 @@ export default function Projects() {
               >
                 <img
                   src={featuredProject.image}
-                  alt={featuredProject.title}
+                  alt={featuredText.title}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/90 text-white backdrop-blur-md">
-                    {featuredProject.category}
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/90 text-white backdrop-blur-md">
-                    ★ Featured Case Study
+                    {t(`projects.categoryLabels.${featuredProject.category}`)}
                   </span>
                 </div>
               </div>
@@ -269,10 +275,10 @@ export default function Projects() {
               <div className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <h3 className="text-2xl md:text-3xl font-black text-zinc-950 dark:text-white tracking-tight leading-snug">
-                    {featuredProject.title}
+                    {featuredText.title}
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
-                    {featuredProject.description}
+                    {featuredText.description}
                   </p>
                   
                   {/* Tech Stack Pills */}
@@ -298,7 +304,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs md:text-sm transition-all shadow-xs"
                     >
                       <Play className="w-4 h-4" fill="currentColor" />
-                      <span>Project Tutorial (Video)</span>
+                      <span>{t('projects.projectTutorialVideo')}</span>
                     </a>
                   )}
 
@@ -306,7 +312,7 @@ export default function Projects() {
                     onClick={() => setSelectedProject(featuredProject)}
                     className="inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm transition-all cursor-pointer shadow-xs"
                   >
-                    Project Details
+                    {t('projects.projectDetails')}
                   </button>
                 </div>
               </div>
@@ -321,7 +327,9 @@ export default function Projects() {
             animate={gridInView ? 'visible' : 'hidden'}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {standardProjects.map((project) => (
+            {standardProjects.map((project) => {
+              const text = projectsText[language][project.id];
+              return (
               <motion.div
                 key={project.id}
                 variants={staggerItem}
@@ -329,37 +337,37 @@ export default function Projects() {
               >
                 <div>
                   {/* Thumbnail Image */}
-                  <div 
+                  <div
                     className="relative h-52 overflow-hidden bg-zinc-900 cursor-pointer"
                     onClick={() => setSelectedProject(project)}
                   >
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={text.title}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-teal-500/90 text-white backdrop-blur-md">
-                      {project.category}
+                      {t(`projects.categoryLabels.${project.category}`)}
                     </span>
 
                     {project.hasVideoDemo && (
                       <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-600/90 text-white backdrop-blur-md flex items-center gap-1">
                         <Play className="w-3 h-3" fill="currentColor" />
-                        Video Demo
+                        {t('projects.videoDemo')}
                       </span>
                     )}
                   </div>
 
                   {/* Card Content Body */}
                   <div className="p-6 space-y-3">
-                    <h3 
+                    <h3
                       className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight leading-snug cursor-pointer hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
                       onClick={() => setSelectedProject(project)}
                     >
-                      {project.title}
+                      {text.title}
                     </h3>
                     <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3">
-                      {project.description}
+                      {text.description}
                     </p>
 
                     {/* Tech Badges */}
@@ -386,7 +394,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs"
                     >
                       <Play className="w-3.5 h-3.5" fill="currentColor" />
-                      <span>Project Tutorial</span>
+                      <span>{t('projects.projectTutorial')}</span>
                     </a>
                   ) : (
                     <a
@@ -395,7 +403,7 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold text-xs transition-all"
                     >
-                      <span>{getResourceLabel(project.githubUrl)}</span>
+                      <span>{getResourceLabel(project.githubUrl, t)}</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -404,11 +412,12 @@ export default function Projects() {
                     onClick={() => setSelectedProject(project)}
                     className="inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-all cursor-pointer"
                   >
-                    Project Details
+                    {t('projects.projectDetails')}
                   </button>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
 
         </div>
@@ -447,10 +456,10 @@ export default function Projects() {
               {/* Category Badge & Title */}
               <div className="space-y-2 pr-8">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-500 text-white">
-                  {selectedProject.category}
+                  {t(`projects.categoryLabels.${selectedProject.category}`)}
                 </span>
                 <h3 className="text-2xl md:text-3xl font-black text-zinc-950 dark:text-white tracking-tight">
-                  {selectedProject.title}
+                  {selectedText.title}
                 </h3>
               </div>
 
@@ -458,25 +467,25 @@ export default function Projects() {
               <div className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-950 shadow-md">
                 <img
                   src={selectedProject.image}
-                  alt={selectedProject.title}
+                  alt={selectedText.title}
                   className="w-full h-auto max-h-[500px] object-contain mx-auto"
                 />
               </div>
 
               {/* Overview */}
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Overview</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">{t('projects.overview')}</h4>
                 <p className="text-zinc-700 dark:text-zinc-300 text-sm md:text-base leading-relaxed">
-                  {selectedProject.description}
+                  {selectedText.description}
                 </p>
               </div>
 
               {/* Key Outcomes */}
-              {selectedProject.keyOutcomes && selectedProject.keyOutcomes.length > 0 && (
+              {selectedText.keyOutcomes && selectedText.keyOutcomes.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400">Key Outcomes</h4>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400">{t('projects.keyOutcomesLabel')}</h4>
                   <ul className="space-y-2.5">
-                    {selectedProject.keyOutcomes.map((outcome, idx) => (
+                    {selectedText.keyOutcomes.map((outcome, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         <span className="w-2 h-2 rounded-full bg-teal-500 dark:bg-teal-400 mt-2 flex-shrink-0" />
                         <span>{outcome}</span>
@@ -489,7 +498,7 @@ export default function Projects() {
               {/* Tech Stack & Action Links Footer */}
               <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-2 items-center">
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mr-2">Tech Stack:</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mr-2">{t('projects.techStackLabel')}</span>
                   {selectedProject.tags.map((tag) => (
                     <span
                       key={tag}
@@ -509,7 +518,7 @@ export default function Projects() {
                       className="px-5 py-2.5 rounded-full bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition-all inline-flex items-center gap-1.5 shadow-xs"
                     >
                       <Play className="w-4 h-4" fill="currentColor" />
-                      <span>Project Tutorial (Video)</span>
+                      <span>{t('projects.projectTutorialVideo')}</span>
                     </a>
                   )}
 
@@ -519,7 +528,7 @@ export default function Projects() {
                     rel="noreferrer"
                     className="px-5 py-2.5 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold text-xs hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
                   >
-                    <span>{getResourceLabel(selectedProject.githubUrl)}</span>
+                    <span>{getResourceLabel(selectedProject.githubUrl, t)}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>

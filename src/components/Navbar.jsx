@@ -1,44 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
-export default function Navbar({ darkMode, setDarkMode }) {
+export default function Navbar({ darkMode, setDarkMode, isHidden = false }) {
+  const { language, setLanguage, t } = useLanguage();
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Experience', href: '#experience', id: 'experience' },
-    { name: 'Education', href: '#education', id: 'education' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Certifications', href: '#certifications', id: 'certifications' },
+    { key: 'home', href: '#home', id: 'home' },
+    { key: 'about', href: '#about', id: 'about' },
+    { key: 'skills', href: '#skills', id: 'skills' },
+    { key: 'experience', href: '#experience', id: 'experience' },
+    { key: 'education', href: '#education', id: 'education' },
+    { key: 'projects', href: '#projects', id: 'projects' },
+    { key: 'certifications', href: '#certifications', id: 'certifications' },
   ];
 
   // Active section tracking logic via IntersectionObserver
   useEffect(() => {
+    const sectionIds = [...navLinks.map((link) => link.id), 'contact'];
+    const ratios = new Map();
+
     const observerOptions = {
       root: null,
       rootMargin: '-25% 0px -45% 0px',
-      threshold: 0.1,
+      threshold: 0,
     };
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+        ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
+
+      let bestId = null;
+      let bestRatio = 0;
+      sectionIds.forEach((id) => {
+        const ratio = ratios.get(id) || 0;
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
         }
       });
+
+      if (bestId) setActiveSection(bestId);
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
+
     navLinks.forEach((link) => {
       const el = document.getElementById(link.id);
       if (el) observer.observe(el);
     });
-    
+
     const contactEl = document.getElementById('contact');
     if (contactEl) observer.observe(contactEl);
 
@@ -46,7 +61,12 @@ export default function Navbar({ darkMode, setDarkMode }) {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/80 transition-colors duration-300">
+    <motion.nav
+      animate={{ y: isHidden ? '-110%' : 0, opacity: isHidden ? 0 : 1 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      style={{ pointerEvents: isHidden ? 'none' : 'auto' }}
+      className="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/80 transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
         {/* Left: Brand/Logo */}
@@ -55,12 +75,12 @@ export default function Navbar({ darkMode, setDarkMode }) {
         </a>
 
         {/* Center: Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-5 lg:gap-7">
+        <div className="hidden lg:flex items-center gap-5 lg:gap-7">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
-                key={link.name}
+                key={link.key}
                 href={link.href}
                 className={`text-sm font-semibold transition-colors duration-200 ${
                   isActive
@@ -68,7 +88,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
                 }`}
               >
-                {link.name}
+                {t(`nav.${link.key}`)}
               </a>
             );
           })}
@@ -76,7 +96,25 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-3 md:gap-4">
-          
+
+          {/* Language Toggle */}
+          <div className="flex items-center rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1 text-xs font-bold">
+            {['en', 'de'].map((lng) => (
+              <button
+                key={lng}
+                onClick={() => setLanguage(lng)}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  language === lng
+                    ? 'bg-white dark:bg-zinc-800 text-zinc-950 dark:text-white shadow-xs'
+                    : 'text-zinc-500 dark:text-zinc-400'
+                }`}
+                aria-label={lng === 'en' ? 'Switch to English' : 'Auf Deutsch wechseln'}
+              >
+                {lng.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
           {/* Theme Toggle Button */}
           <motion.button
             onClick={() => setDarkMode(!darkMode)}
@@ -117,16 +155,16 @@ export default function Navbar({ darkMode, setDarkMode }) {
             href="#contact"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="hidden md:inline-flex px-5 py-2 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100 text-sm font-bold transition-colors shadow-xs"
+            className="hidden lg:inline-flex px-5 py-2 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100 text-sm font-bold transition-colors shadow-xs"
           >
-            Get In Touch
+            {t('nav.getInTouch')}
           </motion.a>
 
           {/* Mobile Hamburger Button */}
           <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
-            className="md:hidden p-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors flex items-center justify-center cursor-pointer"
+            className="lg:hidden p-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors flex items-center justify-center cursor-pointer"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -143,14 +181,14 @@ export default function Navbar({ darkMode, setDarkMode }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden border-t border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950 shadow-lg"
+            className="lg:hidden overflow-hidden border-t border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950 shadow-lg"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
                   <a
-                    key={link.name}
+                    key={link.key}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`text-base font-semibold py-2 transition-colors ${
@@ -159,7 +197,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                         : 'text-zinc-600 dark:text-zinc-400'
                     }`}
                   >
-                    {link.name}
+                    {t(`nav.${link.key}`)}
                   </a>
                 );
               })}
@@ -168,12 +206,12 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full text-center py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100 text-sm font-bold transition-all shadow-xs mt-2"
               >
-                Get In Touch
+                {t('nav.getInTouch')}
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

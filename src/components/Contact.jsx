@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { fadeInUp, scaleIn, staggerContainer, staggerItem, viewportOnce } from '../lib/motionVariants';
 import { GithubIcon, LinkedinIcon } from './icons/BrandIcons';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   return (
     <section id="contact" className="py-24 w-full bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500">
       <div className="max-w-4xl mx-auto px-6">
@@ -19,10 +21,10 @@ export default function Contact() {
         >
           <div className="w-12 h-1 bg-teal-500 dark:bg-teal-400 mx-auto rounded-full" />
           <h2 className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight">
-            Get In Touch
+            {t('contact.heading')}
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto font-medium">
-            Open to data analytics roles, BI consulting, and freelance data projects. Let's build something impactful together.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -34,10 +36,10 @@ export default function Contact() {
             <div className="space-y-6">
               <div className="space-y-3">
                 <h3 className="text-2xl md:text-3xl font-black text-zinc-950 dark:text-white tracking-tight leading-snug">
-                  Let's build something <span className="text-teal-600 dark:text-teal-400">data-driven</span> together.
+                  {t('contact.cardHeadingPrefix')} <span className="text-teal-600 dark:text-teal-400">{t('contact.cardHeadingHighlight')}</span> {t('contact.cardHeadingSuffix')}
                 </h3>
                 <p className="text-zinc-600 dark:text-zinc-400 text-base leading-relaxed">
-                  Whether you're looking for a BI developer, data analyst, or a pipeline engineer — I'm currently available for new opportunities and collaborations.
+                  {t('contact.cardBody')}
                 </p>
               </div>
 
@@ -59,7 +61,7 @@ export default function Contact() {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Email</p>
+                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">{t('contact.emailLabel')}</p>
                     <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">ali.asgharcs147@gmail.com</p>
                   </div>
                 </motion.a>
@@ -76,7 +78,7 @@ export default function Contact() {
                     <LinkedinIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">LinkedIn</p>
+                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">{t('contact.linkedinLabel')}</p>
                     <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">linkedin.com/in/aliiasghar</p>
                   </div>
                 </motion.a>
@@ -93,7 +95,7 @@ export default function Contact() {
                     <GithubIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">GitHub</p>
+                    <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">{t('contact.githubLabel')}</p>
                     <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">github.com/aliasgharcs</p>
                   </div>
                 </motion.a>
@@ -110,17 +112,12 @@ export default function Contact() {
             >
               <div className="w-full max-w-xs rounded-3xl bg-gradient-to-br from-teal-600 via-teal-500 to-emerald-500 p-8 text-white shadow-xl shadow-teal-500/20 space-y-6">
                 <div className="space-y-2">
-                  <p className="text-teal-100 text-xs font-bold uppercase tracking-widest">Currently available for</p>
-                  <h4 className="text-xl font-black leading-snug">Full-time & Freelance Roles</h4>
+                  <p className="text-teal-100 text-xs font-bold uppercase tracking-widest">{t('contact.availableFor')}</p>
+                  <h4 className="text-xl font-black leading-snug">{t('contact.rolesHeading')}</h4>
                 </div>
 
                 <div className="space-y-3">
-                  {[
-                    'Data Analytics',
-                    'BI Development',
-                    'Pipeline Engineering',
-                    'Dashboard Consulting'
-                  ].map((item) => (
+                  {t('contact.services').map((item) => (
                     <div key={item} className="flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-4 h-4 text-teal-200 flex-shrink-0">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -134,7 +131,7 @@ export default function Contact() {
                   href="mailto:ali.asgharcs147@gmail.com"
                   className="block w-full text-center py-3 rounded-xl bg-white text-teal-700 text-sm font-black hover:bg-teal-50 transition-colors"
                 >
-                  Send Me a Message
+                  {t('contact.sendMessage')}
                 </a>
               </div>
             </motion.div>
