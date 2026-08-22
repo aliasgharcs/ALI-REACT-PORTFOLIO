@@ -102,7 +102,7 @@ export default function Projects({ onModalOpenChange } = {}) {
         'Built an intuitive dashboard allowing safety planners to drill down into high-risk zones and contributing factors.',
         'Analyzed patterns in over 3,000 fatal accidents to help prioritize infrastructure upgrades and optimize emergency response.'
       ],
-      image: '/projects/road_accident.jpg',
+      image: '/projects/road_accident.png',
       tags: ['Excel'],
       githubUrl: 'https://drive.google.com/file/d/1k6hkV0ILEBRAVV0frDfwoIOdwc24uTb1/view?usp=sharing'
     },
@@ -349,13 +349,6 @@ export default function Projects({ onModalOpenChange } = {}) {
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-teal-500/90 text-white backdrop-blur-md">
                       {t(`projects.categoryLabels.${project.category}`)}
                     </span>
-
-                    {project.hasVideoDemo && (
-                      <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-600/90 text-white backdrop-blur-md flex items-center gap-1">
-                        <Play className="w-3 h-3" fill="currentColor" />
-                        {t('projects.videoDemo')}
-                      </span>
-                    )}
                   </div>
 
                   {/* Card Content Body */}

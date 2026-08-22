@@ -7,6 +7,16 @@ export default function Navbar({ darkMode, setDarkMode, isHidden = false }) {
   const { language, setLanguage, t } = useLanguage();
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pendingScrollId, setPendingScrollId] = useState(null);
+
+  // Closing the drawer animates its height down; jumping straight to the anchor
+  // while that's happening fights the collapsing layout and the scroll never lands.
+  // Close first, then scroll once the collapse animation has actually finished.
+  const handleMobileNavClick = (e, id) => {
+    e.preventDefault();
+    setPendingScrollId(id);
+    setIsMobileMenuOpen(false);
+  };
 
   const navLinks = [
     { key: 'home', href: '#home', id: 'home' },
@@ -174,7 +184,14 @@ export default function Navbar({ darkMode, setDarkMode, isHidden = false }) {
       </div>
 
       {/* Mobile Drawer Overlay */}
-      <AnimatePresence>
+      <AnimatePresence
+        onExitComplete={() => {
+          if (pendingScrollId) {
+            document.getElementById(pendingScrollId)?.scrollIntoView({ behavior: 'smooth' });
+            setPendingScrollId(null);
+          }
+        }}
+      >
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -190,7 +207,7 @@ export default function Navbar({ darkMode, setDarkMode, isHidden = false }) {
                   <a
                     key={link.key}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => handleMobileNavClick(e, link.id)}
                     className={`text-base font-semibold py-2 transition-colors ${
                       isActive
                         ? 'text-teal-600 dark:text-teal-400 font-bold'
@@ -203,7 +220,7 @@ export default function Navbar({ darkMode, setDarkMode, isHidden = false }) {
               })}
               <a
                 href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleMobileNavClick(e, 'contact')}
                 className="w-full text-center py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100 text-sm font-bold transition-all shadow-xs mt-2"
               >
                 {t('nav.getInTouch')}
